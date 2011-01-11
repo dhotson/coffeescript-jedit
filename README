@@ -1,0 +1,20 @@
+CoffeeScript for jEdit
+----
+
+Provides syntax highlighting support for CoffeeScript in jEdit.
+
+
+Installation
+----
+Copy coffeescript.xml to your jEdit modes directory.
+
+On OSX this is located at:
+~/Library/jEdit/modes/
+
+On linux:
+~/.jedit/modes/
+
+
+Also, add the following line to your ~/Library/jEdit/modes/catalog file:
+
+    <MODE NAME="coffeescript" FILE="coffeescript.xml" FILE_NAME_GLOB="*.coffee" />
