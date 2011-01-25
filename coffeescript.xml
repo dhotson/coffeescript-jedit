@@ -1,170 +1,195 @@
 <?xml version="1.0"?>
 <!DOCTYPE MODE SYSTEM "xmode.dtd">
 
-<!-- CoffeeScript mode by Dennis Hotson
-Also, contributions by: Balazs Toth
+<!-- CoffeeScript mode by Dennis Hotson, Balazs Toth
+
+Beta
+
+Known bugs:
+- When typig closing brackets of various tpes in comments unindentation takes 
+place on pressing enter. In return closing brackets play along nicely when 
+typing code. Probable cause: invalid indentNextLines/unident*Line* handling
+in comments.
+
+Notes:
+- electricKeys have to be further tested.
+- Also see comments inside.
 -->
 <MODE>
-	<PROPS>
-		<PROPERTY NAME="lineComment" VALUE="#" />
-		<PROPERTY NAME="wordBreakChars" VALUE=",+-=&lt;&gt;/?^&amp;*" />
+    <PROPS>
+        <PROPERTY NAME="commentStart" VALUE="###" />
+        <PROPERTY NAME="commentEnd" VALUE="###" />
+        <PROPERTY NAME="lineComment" VALUE="#" />
+        <!-- TODO: might have to be extended -->
+        <PROPERTY NAME="wordBreakChars" VALUE=",+-=&lt;&gt;/?^&amp;*" />
 
-		<!-- Auto indent -->
-		<PROPERTY NAME="indentCloseBrackets" VALUE="}])" />
-		<PROPERTY NAME="indentNextLines" VALUE="\s*((if|else|try|catch|finally|class|while|until|for).*)|(.*[-=]>\s*$)|(.*[\[({]\s*$)" />
+        <!-- Auto indent -->
+        <PROPERTY NAME="indentNextLines"
+            VALUE="(\s*|.*\s+)([\-=]&gt;|[\+\-\*/%\\&lt;&gt;=\!&amp;\|\^~]|(.*\{.*|.*\[.*|.*\(.*|.*:|&lt;&lt;|&gt;&gt;|&gt;&gt;&gt;|\+=|\-=|\*=|/=|%=|&lt;=|&gt;=|==|===|\!=|\!==|is|isnt|not|and|or|&amp;&amp;|\|\||of|in)|(if|else|try|catch|finally|class|while|until|for)(\s*|\s+.*))\s*" />
+        <!--      "(\s*|.*\s+)([\-=]&gt;|[\+\-\*/%\\&lt;&gt;=\!&amp;\|\^~]|(.*\{.*|.*\[.*|.*\(.*|.*:|&lt;&lt;|&gt;&gt;|&gt;&gt;&gt;|\+=|\-=|\*=|/=|%=|&lt;=|&gt;=|==|===|\!=|\!==|is|isnt|not|and|or|&amp;&amp;|\|\||of|in)|(if|else|try|catch|finally|class|while|until|for)(\s*|\s+.*))\s*" /-->
 
-		<PROPERTY NAME="unindentThisLine" VALUE="^\s*(else|catch|finally).*$" />
-		<PROPERTY NAME="unindentNextLines" VALUE="^\s*(else|catch|finally).*$" />
+        <PROPERTY NAME="unindentThisLine"  VALUE="^\s*([\}|\]|\)]\s*|(else|catch|finally)(\s*|\s+.*))$" />
+        <PROPERTY NAME="unindentNextLines" VALUE="^\s*([\}|\]|\)]\s*|(else|catch|finally)(\s*|\s+.*))$" />
+        <!--                                     "^\s*([\}|\]|\)]\s*|(else|catch|finally)(\s*|\s+.*))$" -->
 
-		<PROPERTY NAME="lineUpClosingBracket" VALUE="true" />
-		<PROPERTY NAME="ignoreWhitespace" VALUE="false" />
-		<PROPERTY NAME="electricKeys" VALUE="ehy" />
-	</PROPS>
+        <!-- Not relevant in CoffeeScript, does no trouble though -->
+        <PROPERTY NAME="lineUpClosingBracket" VALUE="true" />
+                
+        <!-- Triggers reindentation on character input.
+        "ehy" removed due to some indentNextLines rules. Use C+i instead. -->
+        <PROPERTY NAME="electricKeys" VALUE="}])" />
+        
+        <!-- Originally designed for Python, does not work correctly with CS -->
+        <!-- PROPERTY NAME="ignoreWhitespace" VALUE="false" /-->
+    </PROPS>
 
-	<RULES IGNORE_CASE="FALSE" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="(\b((0(x|X)[0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?)))\b">
+    <RULES IGNORE_CASE="FALSE" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="(\b((0(x|X)[0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?)))\b">
 
-		<SPAN TYPE="LITERAL1" NO_LINE_BREAK="FALSE" ESCAPE="\">
-			<BEGIN>"</BEGIN>
-			<END>"</END>
-		</SPAN>
+        <SPAN TYPE="LITERAL1" NO_LINE_BREAK="FALSE" ESCAPE="\">
+            <BEGIN>"""</BEGIN>
+            <END>"""</END>
+        </SPAN>
 
-		<SPAN TYPE="LITERAL2" NO_LINE_BREAK="FALSE" ESCAPE="\">
-			<BEGIN>'</BEGIN>
-			<END>'</END>
-		</SPAN>
+        <SPAN TYPE="LITERAL2" NO_LINE_BREAK="FALSE" ESCAPE="\">
+            <BEGIN>'''</BEGIN>
+            <END>'''</END>
+        </SPAN>
 
-		<SPAN TYPE="LITERAL1" NO_LINE_BREAK="FALSE" ESCAPE="\">
-			<BEGIN>"""</BEGIN>
-			<END>"""</END>
-		</SPAN>
+        <SPAN TYPE="LITERAL1" NO_LINE_BREAK="FALSE" ESCAPE="\">
+            <BEGIN>"</BEGIN>
+            <END>"</END>
+        </SPAN>
 
-		<SPAN TYPE="LITERAL2" NO_LINE_BREAK="FALSE" ESCAPE="\">
-			<BEGIN>'''</BEGIN>
-			<END>'''</END>
-		</SPAN>
+        <SPAN TYPE="LITERAL2" NO_LINE_BREAK="FALSE" ESCAPE="\">
+            <BEGIN>'</BEGIN>
+            <END>'</END>
+        </SPAN>
 
-		<SPAN TYPE="LITERAL1" DELEGATE="javascript::MAIN">
-			<BEGIN>`</BEGIN>
-			<END>`</END>
-		</SPAN>
+        <SPAN TYPE="LITERAL1" DELEGATE="javascript::MAIN">
+            <BEGIN>`</BEGIN>
+            <END>`</END>
+        </SPAN>
 
-		<SEQ TYPE="OPERATOR">:</SEQ>
-		<MARK_PREVIOUS TYPE="FUNCTION" MATCH_TYPE="OPERATOR">(</MARK_PREVIOUS>
+        <MARK_PREVIOUS TYPE="FUNCTION" MATCH_TYPE="OPERATOR">(</MARK_PREVIOUS>
 
-		<SEQ TYPE="OPERATOR">)</SEQ>
-		<SEQ TYPE="OPERATOR">{</SEQ>
-		<SEQ TYPE="OPERATOR">}</SEQ>
-		<SEQ TYPE="OPERATOR">[</SEQ>
-		<SEQ TYPE="OPERATOR">]</SEQ>
-		<SEQ TYPE="OPERATOR">.</SEQ>
+        <SEQ TYPE="OPERATOR">)</SEQ>
+        <SEQ TYPE="OPERATOR">{</SEQ>
+        <SEQ TYPE="OPERATOR">}</SEQ>
+        <SEQ TYPE="OPERATOR">[</SEQ>
+        <SEQ TYPE="OPERATOR">]</SEQ>
+        <SEQ TYPE="OPERATOR">.</SEQ>
 
-		<SEQ TYPE="OPERATOR">+</SEQ>
-		<SEQ TYPE="OPERATOR">\</SEQ>
-		<SEQ TYPE="OPERATOR">*</SEQ>
-		<SEQ TYPE="OPERATOR">&amp;</SEQ>
-		<SEQ TYPE="OPERATOR">|</SEQ>
-		<SEQ TYPE="OPERATOR">\</SEQ>
-		<SEQ TYPE="OPERATOR">-</SEQ>
-		<SEQ TYPE="OPERATOR">%</SEQ>
-		<SEQ TYPE="OPERATOR">=</SEQ>
-		<SEQ TYPE="OPERATOR">&lt;</SEQ>
-		<SEQ TYPE="OPERATOR">&gt;</SEQ>
-		<SEQ TYPE="OPERATOR">:</SEQ>
-		<SEQ TYPE="OPERATOR">!</SEQ>
+        <SEQ TYPE="OPERATOR">+</SEQ>
+        <SEQ TYPE="OPERATOR">/</SEQ>
+        <SEQ TYPE="OPERATOR">*</SEQ>
+        <SEQ TYPE="OPERATOR">&amp;</SEQ>
+        <SEQ TYPE="OPERATOR">|</SEQ>
+        <SEQ TYPE="OPERATOR">\</SEQ>
+        <SEQ TYPE="OPERATOR">-</SEQ>
+        <SEQ TYPE="OPERATOR">%</SEQ>
+        <SEQ TYPE="OPERATOR">=</SEQ>
+        <SEQ TYPE="OPERATOR">&lt;</SEQ>
+        <SEQ TYPE="OPERATOR">&gt;</SEQ>
+        <SEQ TYPE="OPERATOR">:</SEQ>
+        <SEQ TYPE="OPERATOR">!</SEQ>
+        <SEQ TYPE="OPERATOR">;</SEQ>
+        <SEQ TYPE="OPERATOR">^</SEQ>
+        <SEQ TYPE="OPERATOR">~</SEQ>
 
-		<SPAN TYPE="COMMENT2">
-			<BEGIN>###</BEGIN>
-			<END>###</END>
-		</SPAN>
-		<SEQ_REGEXP TYPE="COMMENT1">((\n?[ \t]*)?#{3}(?!#)\n*([\s\S]*?)\n*([ \t]*)#{3}|((\n?[ \t]*)?#[^\n]*)+)</SEQ_REGEXP>
-		<SEQ_REGEXP TYPE="LITERAL3">/[\S]([^\\/]|(\\[^a]))*/(([imgy]{1,4})\b|\W)?</SEQ_REGEXP>
+        <SPAN TYPE="COMMENT2">
+            <BEGIN>###</BEGIN>
+            <END>###</END>
+        </SPAN>
+        <EOL_SPAN TYPE="COMMENT1">#</EOL_SPAN>
 
-		<SEQ_REGEXP TYPE="KEYWORD3">@([a-zA-Z\$_](\w|\$)*)</SEQ_REGEXP>
-		<SEQ_REGEXP TYPE="KEYWORD4">([a-zA-Z\$_](\w|\$)*)(?=\s*[:\.])</SEQ_REGEXP>
-		<SEQ_REGEXP TYPE="FUNCTION">([a-zA-Z\$_](\w|\$)*)(?=\s*\()</SEQ_REGEXP>
+        <!-- Has to be reviewed -->
+        <SEQ_REGEXP TYPE="LITERAL3">/[\S]([^\\/]|(\\[^a]))*/(([imgy]{1,4})\b|\W)?</SEQ_REGEXP>
+        
+        <SEQ_REGEXP TYPE="KEYWORD3">@([a-zA-Z\$_](\w|\$)*)</SEQ_REGEXP>
+        <SEQ_REGEXP TYPE="KEYWORD4">([a-zA-Z\$_](\w|\$)*)(?=\s*[:\.])</SEQ_REGEXP>
+        <SEQ_REGEXP TYPE="FUNCTION">([a-zA-Z\$_](\w|\$)*)(?=\s*\()</SEQ_REGEXP>
 
+        <KEYWORDS>
+            <KEYWORD1>if</KEYWORD1>
+            <KEYWORD1>else</KEYWORD1>
+            <KEYWORD1>new</KEYWORD1>
+            <KEYWORD1>return</KEYWORD1>
+            <KEYWORD1>try</KEYWORD1>
+            <KEYWORD1>catch</KEYWORD1>
+            <KEYWORD1>finally</KEYWORD1>
+            <KEYWORD1>throw</KEYWORD1>
+            <KEYWORD1>break</KEYWORD1>
+            <KEYWORD1>continue</KEYWORD1>
+            <KEYWORD1>for</KEYWORD1>
+            <KEYWORD1>in</KEYWORD1>
+            <KEYWORD1>while</KEYWORD1>
+            <KEYWORD1>delete</KEYWORD1>
+            <KEYWORD1>instanceof</KEYWORD1>
+            <KEYWORD1>typeof</KEYWORD1>
+            <KEYWORD1>switch</KEYWORD1>
+            <KEYWORD3>super</KEYWORD3>
+            <KEYWORD1>extends</KEYWORD1>
+            <KEYWORD1>class</KEYWORD1>
+            <KEYWORD1>constructor</KEYWORD1>
+            <KEYWORD3>this</KEYWORD3>
+            <KEYWORD1>case</KEYWORD1>
+            <KEYWORD1>default</KEYWORD1>
+            <KEYWORD1>do</KEYWORD1>
+            <KEYWORD1>function</KEYWORD1>
+            <KEYWORD1>var</KEYWORD1>
+            <KEYWORD1>void</KEYWORD1>
+            <KEYWORD1>with</KEYWORD1>
+            <KEYWORD1>const</KEYWORD1>
+            <KEYWORD1>let</KEYWORD1>
+            <KEYWORD1>enum</KEYWORD1>
+            <KEYWORD1>export</KEYWORD1>
+            <KEYWORD1>import</KEYWORD1>
+            <KEYWORD1>native</KEYWORD1>
+            <KEYWORD1>then</KEYWORD1>
+            <KEYWORD1>unless</KEYWORD1>
+            <KEYWORD1>until</KEYWORD1>
+            <KEYWORD1>of</KEYWORD1>
+            <KEYWORD1>by</KEYWORD1>
+            <KEYWORD1>where</KEYWORD1>
+            <KEYWORD1>when</KEYWORD1>
 
-		<KEYWORDS>
-			<KEYWORD1>if</KEYWORD1>
-			<KEYWORD1>else</KEYWORD1>
-			<KEYWORD1>new</KEYWORD1>
-			<KEYWORD1>return</KEYWORD1>
-			<KEYWORD1>try</KEYWORD1>
-			<KEYWORD1>catch</KEYWORD1>
-			<KEYWORD1>finally</KEYWORD1>
-			<KEYWORD1>throw</KEYWORD1>
-			<KEYWORD1>break</KEYWORD1>
-			<KEYWORD1>continue</KEYWORD1>
-			<KEYWORD1>for</KEYWORD1>
-			<KEYWORD1>in</KEYWORD1>
-			<KEYWORD1>while</KEYWORD1>
-			<KEYWORD1>delete</KEYWORD1>
-			<KEYWORD1>instanceof</KEYWORD1>
-			<KEYWORD1>typeof</KEYWORD1>
-			<KEYWORD1>switch</KEYWORD1>
-			<KEYWORD3>super</KEYWORD3>
-			<KEYWORD1>extends</KEYWORD1>
-			<KEYWORD1>class</KEYWORD1>
-			<KEYWORD1>constructor</KEYWORD1>
-			<KEYWORD3>this</KEYWORD3>
-			<KEYWORD1>case</KEYWORD1>
-			<KEYWORD1>default</KEYWORD1>
-			<KEYWORD1>do</KEYWORD1>
-			<KEYWORD1>function</KEYWORD1>
-			<KEYWORD1>var</KEYWORD1>
-			<KEYWORD1>void</KEYWORD1>
-			<KEYWORD1>with</KEYWORD1>
-			<KEYWORD1>const</KEYWORD1>
-			<KEYWORD1>let</KEYWORD1>
-			<KEYWORD1>enum</KEYWORD1>
-			<KEYWORD1>export</KEYWORD1>
-			<KEYWORD1>import</KEYWORD1>
-			<KEYWORD1>native</KEYWORD1>
-			<KEYWORD1>then</KEYWORD1>
-			<KEYWORD1>unless</KEYWORD1>
-			<KEYWORD1>until</KEYWORD1>
-			<KEYWORD1>of</KEYWORD1>
-			<KEYWORD1>by</KEYWORD1>
-			<KEYWORD1>where</KEYWORD1>
-			<KEYWORD1>when</KEYWORD1>
+            <KEYWORD1>and</KEYWORD1>
+            <KEYWORD1>or</KEYWORD1>
+            <KEYWORD1>not</KEYWORD1>
+            <KEYWORD1>is</KEYWORD1>
+            <KEYWORD1>isnt</KEYWORD1>
 
-			<KEYWORD1>and</KEYWORD1>
-			<KEYWORD1>or</KEYWORD1>
-			<KEYWORD1>not</KEYWORD1>
-			<KEYWORD1>is</KEYWORD1>
-			<KEYWORD1>isnt</KEYWORD1>
+            <KEYWORD3>prototype</KEYWORD3>
+            <KEYWORD3>Array</KEYWORD3>
+            <KEYWORD3>Boolean</KEYWORD3>
+            <KEYWORD3>Date</KEYWORD3>
+            <KEYWORD3>Function</KEYWORD3>
+            <KEYWORD3>Global</KEYWORD3>
+            <KEYWORD3>Math</KEYWORD3>
+            <KEYWORD3>Number</KEYWORD3>
+            <KEYWORD3>Object</KEYWORD3>
+            <KEYWORD3>RegExp</KEYWORD3><!-- Not ECMA -->
+            <KEYWORD3>String</KEYWORD3>
 
-			<KEYWORD3>prototype</KEYWORD3>
-			<KEYWORD3>Array</KEYWORD3>
-			<KEYWORD3>Boolean</KEYWORD3>
-			<KEYWORD3>Date</KEYWORD3>
-			<KEYWORD3>Function</KEYWORD3>
-			<KEYWORD3>Global</KEYWORD3>
-			<KEYWORD3>Math</KEYWORD3>
-			<KEYWORD3>Number</KEYWORD3>
-			<KEYWORD3>Object</KEYWORD3>
-			<KEYWORD3>RegExp</KEYWORD3><!-- Not ECMA -->
-			<KEYWORD3>String</KEYWORD3>
+            <!-- Literals -->
+            <LITERAL2>false</LITERAL2>
+            <LITERAL2>null</LITERAL2>
+            <LITERAL2>true</LITERAL2>
+            <LITERAL2>yes</LITERAL2>
+            <LITERAL2>no</LITERAL2>
+            <LITERAL2>on</LITERAL2>
+            <LITERAL2>off</LITERAL2>
+            <LITERAL2>NaN</LITERAL2>
+            <LITERAL2>Infinity</LITERAL2>
 
-			<!-- Literals -->
-			<LITERAL2>false</LITERAL2>
-			<LITERAL2>null</LITERAL2>
-			<LITERAL2>true</LITERAL2>
-			<LITERAL2>yes</LITERAL2>
-			<LITERAL2>no</LITERAL2>
-			<LITERAL2>on</LITERAL2>
-			<LITERAL2>off</LITERAL2>
-			<LITERAL2>NaN</LITERAL2>
-			<LITERAL2>Infinity</LITERAL2>
-
-			<!-- Global functions -->
-			<LITERAL2>eval</LITERAL2>
-			<LITERAL2>parseInt</LITERAL2>
-			<LITERAL2>parseFloat</LITERAL2>
-			<LITERAL2>escape</LITERAL2>
-			<LITERAL2>unescape</LITERAL2>
-			<LITERAL2>isNaN</LITERAL2>
-			<LITERAL2>isFinite</LITERAL2>
-		</KEYWORDS>
-	</RULES>
+            <!-- Global functions -->
+            <LITERAL2>eval</LITERAL2>
+            <LITERAL2>parseInt</LITERAL2>
+            <LITERAL2>parseFloat</LITERAL2>
+            <LITERAL2>escape</LITERAL2>
+            <LITERAL2>unescape</LITERAL2>
+            <LITERAL2>isNaN</LITERAL2>
+            <LITERAL2>isFinite</LITERAL2>
+        </KEYWORDS>
+    </RULES>
 </MODE>
