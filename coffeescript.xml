@@ -5,15 +5,9 @@
 
 Beta
 
-Known bugs:
-- When typing closing brackets of various types in comments unindentation takes
-place on pressing enter. In return closing brackets play along nicely when
-typing code. Probable cause: invalid indentNextLines/unident*Line* handling
-in comments.
-
-Notes:
-- electricKeys have to be further tested.
-- Also see comments inside.
+TODO:
+- delegation of "#{ bla }" templates
+- reconsider (un)indentation rules for brackets
 -->
 <MODE>
 	<PROPS>
@@ -25,17 +19,17 @@ Notes:
 
 		<!-- Auto indent -->
 		<PROPERTY NAME="indentNextLines"
-			VALUE="(\s*|.*\s+)([\-=]&gt;|[\+\-\*/%\\&lt;&gt;=\!&amp;\|\^~]|(.*\{.*|.*\[.*|.*\(.*|.*:|&lt;&lt;|&gt;&gt;|&gt;&gt;&gt;|\+=|\-=|\*=|/=|%=|&lt;=|&gt;=|==|===|\!=|\!==|is|isnt|not|and|or|&amp;&amp;|\|\||of|in)|(if|else|try|catch|finally|class|while|until|for)(\s*|\s+.*))\s*" />
+			VALUE="((\s*|.*\s+)([\-=]&gt;|[\+\-\*/%\\&lt;&gt;=\!&amp;\|\^~]|(.*:|&lt;&lt;|&gt;&gt;|&gt;&gt;&gt;|\+=|\-=|\*=|/=|%=|&lt;=|&gt;=|==|===|\!=|\!==|is|isnt|not|and|or|&amp;&amp;|\|\||of|in))|\s*(if|else|try|catch|finally|class|while|until|for)(\s*|\s+.*))\s*" />
 
-		<PROPERTY NAME="unindentThisLine"  VALUE="^\s*([\}|\]|\)]\s*|(else|catch|finally)(\s*|\s+.*))$" />
-		<PROPERTY NAME="unindentNextLines" VALUE="^\s*([\}|\]|\)]\s*|(else|catch|finally)(\s*|\s+.*))$" />
+		<PROPERTY NAME="unindentThisLine"  VALUE="^\s*(else|catch|finally)(\s*|\s+.*)$" />
+		<PROPERTY NAME="unindentNextLines" VALUE="^\s*(else|catch|finally)(\s*|\s+.*)$" />
 
 		<!-- Not relevant in CoffeeScript, does no trouble though -->
 		<PROPERTY NAME="lineUpClosingBracket" VALUE="true" />
 
 		<!-- Triggers reindentation on character input.
-		"ehy" removed due to some indentNextLines rules. Use C+i instead. -->
-		<PROPERTY NAME="electricKeys" VALUE="}])" />
+		TODO: reconsider the usage of this one, including "ehy" -->
+		<!-- PROPERTY NAME="electricKeys" VALUE="}])" /-->
 
 		<!-- Originally designed for Python, does not work correctly with CS -->
 		<!-- PROPERTY NAME="ignoreWhitespace" VALUE="false" /-->
@@ -100,7 +94,7 @@ Notes:
 		</SPAN>
 		<EOL_SPAN TYPE="COMMENT1">#</EOL_SPAN>
 
-		<!-- Has to be reviewed -->
+		<!-- TODO: might have to be reviewed -->
 		<SEQ_REGEXP TYPE="LITERAL3">/[\S]([^\\/]|(\\[^a]))*/(([imgy]{1,4})\b|\W)?</SEQ_REGEXP>
 
 		<SEQ_REGEXP TYPE="KEYWORD3">@([a-zA-Z\$_](\w|\$)*)</SEQ_REGEXP>
