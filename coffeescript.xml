@@ -37,7 +37,7 @@ TODO:
 	<RULES
 		IGNORE_CASE="FALSE"
 		HIGHLIGHT_DIGITS="TRUE"
-		DIGIT_RE="(0x[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)">
+		DIGIT_RE="(\b((0(x|X)[0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?)))\b">
 
 		<SPAN TYPE="COMMENT2">
 			<BEGIN>###</BEGIN>
@@ -161,17 +161,17 @@ TODO:
 			<KEYWORD1>is</KEYWORD1>
 			<KEYWORD1>isnt</KEYWORD1>
 
-			<KEYWORD2>prototype</KEYWORD2>
-			<KEYWORD2>Array</KEYWORD2>
-			<KEYWORD2>Boolean</KEYWORD2>
-			<KEYWORD2>Date</KEYWORD2>
-			<KEYWORD2>Function</KEYWORD2>
-			<KEYWORD2>Global</KEYWORD2>
-			<KEYWORD2>Math</KEYWORD2>
-			<KEYWORD2>Number</KEYWORD2>
-			<KEYWORD2>Object</KEYWORD2>
-			<KEYWORD2>RegExp</KEYWORD2><!-- Not ECMA -->
-			<KEYWORD2>String</KEYWORD2>
+			<KEYWORD3>prototype</KEYWORD3>
+			<KEYWORD3>Array</KEYWORD3>
+			<KEYWORD3>Boolean</KEYWORD3>
+			<KEYWORD3>Date</KEYWORD3>
+			<KEYWORD3>Function</KEYWORD3>
+			<KEYWORD3>Global</KEYWORD3>
+			<KEYWORD3>Math</KEYWORD3>
+			<KEYWORD3>Number</KEYWORD3>
+			<KEYWORD3>Object</KEYWORD3>
+			<KEYWORD3>RegExp</KEYWORD3><!-- Not ECMA -->
+			<KEYWORD3>String</KEYWORD3>
 
 			<!-- Literals -->
 			<LITERAL2>false</LITERAL2>
