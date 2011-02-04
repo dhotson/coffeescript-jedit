@@ -6,7 +6,6 @@
 Beta
 
 TODO:
-- highlighting comments in heregexps
 - reconsider (un)indentation rules for brackets
 -->
 <MODE>
@@ -24,7 +23,7 @@ TODO:
 		<PROPERTY NAME="unindentNextLines" VALUE="^\s*(else|catch|finally)(\s*|\s+.*)$" />
 
 		<!-- Props regarding brackets generally do not play well with CoffeScript -->
-		
+
 		<!-- Triggers reindentation on character input.
 		TODO: reconsider the use of this one, including "ehy" -->
 		<!-- PROPERTY NAME="electricKeys" VALUE="}])" /-->
@@ -72,7 +71,7 @@ TODO:
 		<!-- Javascript-style regexps -->
 		<SEQ_REGEXP TYPE="MARKUP">(?&lt;!\d)\s*/(?![\s/*+{}?]).*/[igmy]*</SEQ_REGEXP>
 		<!-- Heregexps -->
-		<SPAN TYPE="MARKUP">
+		<SPAN TYPE="MARKUP" DELEGATE="hereRegexp">
 			<BEGIN>///</BEGIN>
 			<END>///</END>
 		</SPAN>
@@ -112,7 +111,7 @@ TODO:
 		<KEYWORDS>
 			<KEYWORD3>this</KEYWORD3>
 			<KEYWORD3>super</KEYWORD3>
-			
+
 			<KEYWORD1>if</KEYWORD1>
 			<KEYWORD1>else</KEYWORD1>
 			<KEYWORD1>new</KEYWORD1>
@@ -153,7 +152,7 @@ TODO:
 			<KEYWORD1>by</KEYWORD1>
 			<KEYWORD1>where</KEYWORD1>
 			<KEYWORD1>when</KEYWORD1>
-			
+
 			<KEYWORD1>and</KEYWORD1>
 			<KEYWORD1>or</KEYWORD1>
 			<KEYWORD1>not</KEYWORD1>
@@ -204,6 +203,11 @@ TODO:
 		<MARK_FOLLOWING TYPE="KEYWORD4">#@@</MARK_FOLLOWING>
 		<MARK_FOLLOWING TYPE="KEYWORD4">#@</MARK_FOLLOWING>
 		<MARK_FOLLOWING TYPE="NULL">#$</MARK_FOLLOWING>
+	</RULES>
+
+	<!-- Comments in heregexes -->
+	<RULES DEFAULT="MARKUP" SET="hereRegexp" ESCAPE="\">
+		<EOL_SPAN TYPE="COMMENT1">#</EOL_SPAN>
 	</RULES>
 
 </MODE>
