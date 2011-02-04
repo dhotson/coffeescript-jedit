@@ -7,7 +7,6 @@ Beta
 
 TODO:
 - highlighting comments in heregexps
-- delegation of "#{ bla }" templates
 - reconsider (un)indentation rules for brackets
 -->
 <MODE>
@@ -44,8 +43,8 @@ TODO:
 			<END>###</END>
 		</SPAN>
 		<EOL_SPAN TYPE="COMMENT1">#</EOL_SPAN>
-		
-		<SPAN TYPE="LITERAL1" NO_LINE_BREAK="FALSE" ESCAPE="\">
+
+		<SPAN TYPE="LITERAL1" NO_LINE_BREAK="FALSE" ESCAPE="\" DELEGATE="doubleQuoteLiteral">
 			<BEGIN>"""</BEGIN>
 			<END>"""</END>
 		</SPAN>
@@ -55,7 +54,7 @@ TODO:
 			<END>'''</END>
 		</SPAN>
 
-		<SPAN TYPE="LITERAL1" NO_LINE_BREAK="FALSE" ESCAPE="\">
+		<SPAN TYPE="LITERAL1" NO_LINE_BREAK="FALSE" ESCAPE="\" DELEGATE="doubleQuoteLiteral">
 			<BEGIN>"</BEGIN>
 			<END>"</END>
 		</SPAN>
@@ -194,4 +193,17 @@ TODO:
 			<LITERAL2>isFinite</LITERAL2>
 		</KEYWORDS>
 	</RULES>
+
+	<!-- Delegate contents of #{} expression in double quotes to MAIN so that
+	     it will be syntax highlighted as well -->
+	<RULES DEFAULT="LITERAL1" SET="doubleQuoteLiteral" ESCAPE="\">
+		<SPAN DELEGATE="MAIN" TYPE="OPERATOR">
+			<BEGIN>#{</BEGIN>
+			<END>}</END>
+		</SPAN>
+		<MARK_FOLLOWING TYPE="KEYWORD4">#@@</MARK_FOLLOWING>
+		<MARK_FOLLOWING TYPE="KEYWORD4">#@</MARK_FOLLOWING>
+		<MARK_FOLLOWING TYPE="NULL">#$</MARK_FOLLOWING>
+	</RULES>
+
 </MODE>
