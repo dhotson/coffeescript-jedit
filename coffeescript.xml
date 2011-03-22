@@ -106,7 +106,7 @@ TODO:
 		<SEQ TYPE="OPERATOR">?</SEQ>
 
 		<SEQ_REGEXP TYPE="KEYWORD3">@([a-zA-Z\$_](\w|\$)*)</SEQ_REGEXP>
-		<SEQ_REGEXP TYPE="KEYWORD4">([a-zA-Z\$_](\w|\$)*)(?=\s*[:\.])</SEQ_REGEXP>
+		<SEQ_REGEXP TYPE="KEYWORD4">([a-zA-Z\$_](\w|\$)*)(?=\s*(?:[:\.]|\?\.))</SEQ_REGEXP>
 
 		<KEYWORDS>
 			<KEYWORD3>this</KEYWORD3>
