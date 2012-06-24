@@ -202,8 +202,12 @@ TODO:
 		</SPAN>
 	</RULES>
 
-	<!-- Comments in heregexes -->
+	<!-- Comments and #{} interpolation in heregexes -->
 	<RULES DEFAULT="MARKUP" SET="hereRegexp" ESCAPE="\">
+		<SPAN DELEGATE="MAIN" TYPE="OPERATOR">
+			<BEGIN>#{</BEGIN>
+			<END>}</END>
+		</SPAN>
 		<EOL_SPAN TYPE="COMMENT1">#</EOL_SPAN>
 	</RULES>
 
