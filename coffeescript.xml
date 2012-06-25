@@ -68,13 +68,16 @@ TODO:
 			<END>`</END>
 		</SPAN>
 
-		<!-- Javascript-style regexps -->
-		<SEQ_REGEXP TYPE="MARKUP">(?&lt;!\d)\s*/(?![\s/*+{}?]).*/[igmy]*</SEQ_REGEXP>
 		<!-- Heregexps -->
 		<SPAN TYPE="MARKUP" DELEGATE="hereRegexp">
 			<BEGIN>///</BEGIN>
 			<END>///</END>
 		</SPAN>
+		<!-- Javascript-style regexps -->
+		<SPAN_REGEXP TYPE="MARKUP" HASH_CHAR="/" AT_WORD_START="TRUE" NO_LINE_BREAK="TRUE" ESCAPE="\">
+		    <BEGIN>/(?![\s=*])</BEGIN>
+		    <END REGEXP="TRUE">/[igmy]{0,4}</END>
+		</SPAN_REGEXP>
 
 		<MARK_PREVIOUS TYPE="FUNCTION" MATCH_TYPE="OPERATOR">(</MARK_PREVIOUS>
 		<!-- Seems to be equivalent to
