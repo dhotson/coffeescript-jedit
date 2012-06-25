@@ -35,7 +35,7 @@ TODO:
 	<RULES
 		IGNORE_CASE="FALSE"
 		HIGHLIGHT_DIGITS="TRUE"
-		DIGIT_RE="(0[xX][0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?([eE][+\-]?[0-9]+)?)">
+		DIGIT_RE="(0b[01]+)|(0o[0-7]+)|(0x\p{XDigit}+)|(\d*\.?\d+(e[+-]?\d+)?)">
 
 		<SPAN_REGEXP TYPE="COMMENT2" HASH_CHARS="###">
 			<BEGIN>###(?!#)</BEGIN>
