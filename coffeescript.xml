@@ -135,19 +135,7 @@ TODO:
 			<KEYWORD1>extends</KEYWORD1>
 			<KEYWORD1>class</KEYWORD1>
 			<KEYWORD1>constructor</KEYWORD1>
-			<KEYWORD1>case</KEYWORD1>
-			<KEYWORD1>default</KEYWORD1>
 			<KEYWORD1>do</KEYWORD1>
-			<KEYWORD1>function</KEYWORD1>
-			<KEYWORD1>var</KEYWORD1>
-			<KEYWORD1>void</KEYWORD1>
-			<KEYWORD1>with</KEYWORD1>
-			<KEYWORD1>const</KEYWORD1>
-			<KEYWORD1>let</KEYWORD1>
-			<KEYWORD1>enum</KEYWORD1>
-			<KEYWORD1>export</KEYWORD1>
-			<KEYWORD1>import</KEYWORD1>
-			<KEYWORD1>native</KEYWORD1>
 			<KEYWORD1>then</KEYWORD1>
 			<KEYWORD1>unless</KEYWORD1>
 			<KEYWORD1>until</KEYWORD1>
@@ -175,6 +163,7 @@ TODO:
 			<KEYWORD3>String</KEYWORD3>
 
 			<!-- Literals -->
+			<LITERAL2>undefined</LITERAL2>
 			<LITERAL2>false</LITERAL2>
 			<LITERAL2>null</LITERAL2>
 			<LITERAL2>true</LITERAL2>
