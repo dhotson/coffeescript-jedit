@@ -109,8 +109,8 @@ TODO:
 		<SEQ TYPE="OPERATOR">~</SEQ>
 		<SEQ TYPE="OPERATOR">?</SEQ>
 
-		<SEQ_REGEXP TYPE="KEYWORD3">@([a-zA-Z\$_][\w\$_]*)</SEQ_REGEXP>
-		<SEQ_REGEXP TYPE="KEYWORD4">([a-zA-Z\$_][\w\$_]*)(?=\s*(?:[:\.]|\?\.))</SEQ_REGEXP>
+		<SEQ_REGEXP TYPE="KEYWORD3">@([\p{IsAlphabetic}\$_][\p{IsAlnum}\$_]*)</SEQ_REGEXP>
+		<SEQ_REGEXP TYPE="KEYWORD4">([\p{IsAlphabetic}\$_][\p{IsAlnum}\$_]*)(?=\s*(?:[:\.]|\?\.))</SEQ_REGEXP>
 		<SEQ_REGEXP TYPE="KEYWORD1" AT_WORD_START="TRUE" HASH_CHARS="for ">for\s+own(?![$_\p{IsAlnum}])</SEQ_REGEXP>
 
 		<KEYWORDS>
