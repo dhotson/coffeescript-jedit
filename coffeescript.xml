@@ -35,6 +35,7 @@ TODO:
 	<RULES
 		IGNORE_CASE="FALSE"
 		HIGHLIGHT_DIGITS="TRUE"
+		NO_WORD_SEP="$_"
 		DIGIT_RE="(0b[01]+)|(0o[0-7]+)|(0x\p{XDigit}+)|(\d*\.?\d+(e[+-]?\d+)?)">
 
 		<SPAN_REGEXP TYPE="COMMENT2" HASH_CHARS="###">
@@ -108,8 +109,9 @@ TODO:
 		<SEQ TYPE="OPERATOR">~</SEQ>
 		<SEQ TYPE="OPERATOR">?</SEQ>
 
-		<SEQ_REGEXP TYPE="KEYWORD3">@([a-zA-Z\$_](\w|\$)*)</SEQ_REGEXP>
-		<SEQ_REGEXP TYPE="KEYWORD4">([a-zA-Z\$_](\w|\$)*)(?=\s*(?:[:\.]|\?\.))</SEQ_REGEXP>
+		<SEQ_REGEXP TYPE="KEYWORD3">@([\p{IsAlphabetic}\$_][\p{IsAlnum}\$_]*)</SEQ_REGEXP>
+		<SEQ_REGEXP TYPE="KEYWORD4">([\p{IsAlphabetic}\$_][\p{IsAlnum}\$_]*)(?=\s*(?:[:\.]|\?\.))</SEQ_REGEXP>
+		<SEQ_REGEXP TYPE="KEYWORD1" AT_WORD_START="TRUE" HASH_CHARS="for ">for\s+own(?![$_\p{IsAlnum}])</SEQ_REGEXP>
 
 		<KEYWORDS>
 			<KEYWORD3>this</KEYWORD3>
