@@ -17,7 +17,7 @@ TODO:
 
 		<!-- Auto indent -->
 		<PROPERTY NAME="indentNextLines"
-			VALUE="((\s*|.*\s+)([\-=]&gt;|[\+\-\*/%\\&lt;&gt;=\!&amp;\|\^~]|(.*:|&lt;&lt;|&gt;&gt;|&gt;&gt;&gt;|\+=|\-=|\*=|/=|%=|&lt;=|&gt;=|==|===|\!=|\!==|is|isnt|not|and|or|&amp;&amp;|\|\||of|in))|\s*(if|else|try|catch|finally|class|while|until|for)(\s*|\s+.*))\s*" />
+			VALUE="((\s*|.*\s+)([\-=]&gt;|[\+\-\*/%\\&lt;&gt;=\!&amp;\|\^~]|(.*:|&lt;&lt;|&gt;&gt;|&gt;&gt;&gt;|\+=|\-=|\*=|/=|%=|&lt;=|&gt;=|==|===|\!=|\!==|is|isnt|not|and|or|&amp;&amp;|\|\||of|in|loop))|\s*(if|else|try|catch|finally|class|while|until|for)(\s*|\s+.*))\s*" />
 
 		<PROPERTY NAME="unindentThisLine"  VALUE="^\s*(else|catch|finally)(\s*|\s+.*)$" />
 		<PROPERTY NAME="unindentNextLines" VALUE="^\s*(else|catch|finally)(\s*|\s+.*)$" />
@@ -130,6 +130,7 @@ TODO:
 			<KEYWORD1>for</KEYWORD1>
 			<KEYWORD1>in</KEYWORD1>
 			<KEYWORD1>while</KEYWORD1>
+			<KEYWORD1>loop</KEYWORD1>
 			<KEYWORD1>delete</KEYWORD1>
 			<KEYWORD1>instanceof</KEYWORD1>
 			<KEYWORD1>typeof</KEYWORD1>
