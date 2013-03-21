@@ -70,7 +70,7 @@ TODO:
 		</SPAN>
 
 		<!-- Heregexps -->
-		<SPAN TYPE="MARKUP" DELEGATE="hereRegexp">
+		<SPAN TYPE="MARKUP" DELEGATE="hereRegexp" ESCAPE="\">
 			<BEGIN>///</BEGIN>
 			<END>///</END>
 		</SPAN>
